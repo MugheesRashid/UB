@@ -41,7 +41,7 @@ function Loader({ setLoading }) {
         {!isLoaded && (
           <motion.div
             key="loader"
-            className="w-screen h-screen z-50 bg-[#2c2c2c] overflow-hidden fixed top-0 left-0 flex items-center justify-center"
+            className="w-screen h-screen z-50 bg-[#111] overflow-hidden fixed top-0 left-0 flex items-center justify-center"
             exit={{ height: 0 }}
             transition={{ duration: 0.2, ease: "linear", delay: 0.8 }}
           >

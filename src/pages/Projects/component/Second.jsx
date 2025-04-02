@@ -1,95 +1,35 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { div } from "motion/react-client";
+import React from "react";
 
-const projects = [
-  {
-    id: 1,
-    title: "Pipeline Fitting Industry of KSA",
-    services: [
-      "Instrumental Services",
-      "Mechanical Services",
-      "Instrumental Services",
-      "Mechanical Services",
-    ],
-    description:
-      "A leading industry in KSA specializing in pipeline fitting solutions.",
-    image: "https://via.placeholder.com/400", // Replace with actual image
-  },
-  {
-    id: 2,
-    title: "Al Rashid Trading & Contracting Co. (Jubail)",
-    services: [
-      "Instrumental Services",
-      "Mechanical Services",
-      "Instrumental Services",
-      "Mechanical Services",
-    ],
-    description:
-      "Providing top-tier trading and contracting services in Jubail.",
-    image: "https://via.placeholder.com/400",
-  },
-  {
-    id: 3,
-    title: "Honeywell Building Technologies (Riyadh)",
-    services: [
-      "Instrumental Services",
-      "Mechanical Services",
-      "Instrumental Services",
-      "Mechanical Services",
-    ],
-    description: "Innovating smart building solutions in Riyadh.",
-    image: "https://via.placeholder.com/400",
-  },
-];
-
-export default function Second() {
-  const [expanded, setExpanded] = useState(null);
+export default function Second({setExpanded, projects, setProjects, setActiveIndex}) {
 
   return (
-    <div className="w-full h-[auto] flex flex-col items-center justify-center gap-[2vh] bg-red-500 text-[#2c2c2c]">
+    <div className="w-full h-[auto] flex flex-col items-center justify-center gap-[2vh] text-[#2c2c2c]">
       <h2 className="text-[6vw] leading-none tracking-tighter montserrat font-semibold">
         Projects
       </h2>
-      <div className="flex flex-col px-[3vw] text-[#2c2c2c] w-[80%]">
-        <h1 className="text-[2vw] uppercase font-semibold montserrat w-full">
+      <div className="flex flex-col px-[3vw] w-[90%]">
+        <h1 className="text-[2vw] uppercase font-semibold montserrat w-full ml-[2vw] mb-2 text-[#000]">
           Ongoing:
         </h1>
-        <div className="flex flex-col gap-[3vh]">
-          <div className="w-full flex flex-row justify-between gap-[2vw] bg-blue-500 py-4 border-t border-b pr-3 tracking-tight">
-            <div className="flex w-1/2 items-center justify-center gap-1">
-              <p>1.</p>
+        <div className="flex flex-col gap-[0vh]">
+          {projects.map((project, idx) => (
+          <div onClick={()=> {setExpanded(true); setProjects(projects) ;setActiveIndex(idx)}} key={project.id} className={`w-full hover:text-[#000] text-[#2c2c2c] flex flex-row justify-between gap-[2vw] py-4 border-t ${idx === projects.length - 1 ? 'border-b': ""} pr-3 tracking-tight`}>
+            <div className="flex w-2/3 items-center justify-start gap-1">
+              <p className="text-[1.4vw] montaga">{project.id}.</p>
               <div className="flex flex-col justify-between">
-                <h4 className="text-xl font-medium">Pipeline Fitting Industry of KSA</h4>
-                <div className="flex flex-row w-2/3 gap-2 leading-none flex-wrap">
-                  <p>Instrumental Services</p>
-                  <p>Instrumental Services</p>
-                  <p>Instrumental Services</p>
-                  <p>Instrumental Services</p>
+                <h4 className="text-[2vw] tracking-tighter font-medium montserrat">{project.title}</h4>
+                <div className="flex flex-row w-2/3 gap-2 leading-none flex-wrap text-[1vw] inter">
+                {project.services.map((service, index) => (
+                  <p key={index+99}>{service}</p>
+                ))}
                 </div>
               </div>
             </div>
             <div className="flex justify-center items-end">
-              <p>View More</p> 
+              <p className=" inter tracking-tight">View Project</p> 
             </div>
           </div>
-          <div className="w-full flex flex-row justify-between gap-[2vw]">
-            <div className="flex w-1/2">
-              <p>1.</p>
-              <div className="flex flex-col justify-between">
-                <h4>Pipeline Fitting Industry of KSA</h4>
-                <div className="flex flex-row flex-wrap">
-                  <p>Instrumental Services</p>
-                  <p>Instrumental Services</p>
-                  <p>Instrumental Services</p>
-                  <p>Instrumental Services</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-center items-center w-1/2">
-              <p>View More</p> 
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
