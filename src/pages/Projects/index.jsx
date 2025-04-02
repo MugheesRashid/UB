@@ -3,6 +3,7 @@ import First from "./component/First";
 import Second from "./component/Second";
 import Third from "./component/Third";
 import ProjectPopup from "./component/ProjectPopup";
+import ProjectList from "./component/ProjectList";
 import "./style.css";
 
 const Ongoing = [
@@ -136,17 +137,36 @@ const Completed = [
 
 function index() {
   const [expanded, setExpanded] = useState(false);
-  const [projects, setProjects] = useState(Ongoing);
-  const [activeIndex, setActiveIndex] = useState(0)
+const [projects, setProjects] = useState(Ongoing); // Default to Ongoing
+const [activeIndex, setActiveIndex] = useState(0);
 
-  return (
-    <>
-      <First />
-      <Second setExpanded={setExpanded} setProjects={setProjects} projects={Ongoing} setActiveIndex={setActiveIndex} />
-      <Third setExpanded={setExpanded} setProjects={setProjects} projects={Completed} setActiveIndex={setActiveIndex} />
-      <ProjectPopup expanded={expanded} projects={projects} Ongoing={Ongoing} Completed={Completed} activeIndex={activeIndex} setExpanded={setExpanded} />
-    </>
-  );
+return (
+  <>
+    <First />
+    <ProjectList
+      title="Ongoing"
+      projects={Ongoing}
+      setExpanded={setExpanded}
+      setProjects={setProjects}
+      setActiveIndex={setActiveIndex}
+    />
+    <ProjectList
+      title="Completed"
+      projects={Completed}
+      setExpanded={setExpanded}
+      setProjects={setProjects}
+      setActiveIndex={setActiveIndex}
+    />
+    <ProjectPopup
+      expanded={expanded}
+      setExpanded={setExpanded}
+      projects={projects}
+      activeIndex={activeIndex}
+      setActiveIndex={setActiveIndex}
+    />
+  </>
+);
+
 }
 
 export default index;
