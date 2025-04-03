@@ -71,7 +71,7 @@ function Cursor() {
   return (
     <motion.div
       ref={cursorRef}
-      className={`fixed top-0 left-0 rounded-full pointer-events-none z-50 flex items-center justify-center ${
+      className={`fixed top-0 left-0 rounded-full pointer-events-none z-50 flex items-center justify-center mix-blend-multiply ${
         cursorStyles[cursorVariant.cursorVariant]
       }`}
       animate={{

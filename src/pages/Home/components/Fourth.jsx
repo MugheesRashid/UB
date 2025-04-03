@@ -43,7 +43,7 @@ function Fourth() {
     return () => canvaPin.kill();
   });
   return (
-    <div className="w-screen h-auto  mt-[300px] px-[7.8vw] py-[100px] bg-[#f2f2f2]">
+    <div className="w-screen h-auto px-[7.8vw] py-[100px] bg-[#f2f2f2]">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -80,7 +80,10 @@ function Fourth() {
               key={idx}
               className="w-full h-[60vh] flex flex-row items-center justify-between"
             >
-              <h5 className="text-[4.3vw] w-1/3 leading-none">{elem.title}</h5>
+              <div className="w-1/3">
+              <p className="text-[1vw]">{idx+1}.</p>
+              <h5 className="text-[4.3vw] w-full font-medium leading-none tracking-tight">{elem.title}</h5>
+              </div>
               <p className="w-1/3 poppin font-normal text-[1.2vw] leading-tight">
                 {elem.description}
                 <span className="block text-[#FF6A39] font-semibold">

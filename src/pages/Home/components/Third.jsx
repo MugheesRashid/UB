@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { opacityVariant2 } from "../../../assets/animation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 
@@ -88,9 +89,9 @@ function Third() {
         scrub: 1,
         ease: "power4.inOut",
         pin: true,
-        pinSpacing: false,
+        anticipatePin: 1,
         onUpdate: (self) => {
-          setTurn(self.progress >= 0.5);
+          setTurn(self.progress >= 0.3);
         },
       },
     });
@@ -138,27 +139,47 @@ function Third() {
   }, []);
 
   return (
-    <div className="third relative w-screen h-[115vh] pr-[8.8vw] pt-[15vh] rounded-tl-4xl rounded-br-4xl  bg-[#111] flex flex-row justify-center items-center will-change-transform">
-      <div className="w-[9vw] h-full flex items-center justify-center">
+    <div className="third relative w-screen h-[115vh] pr-[8.8vw] pt-[15vh] rounded-tl-4xl rounded-br-4xl  bg-[#1c1c1c] flex flex-row justify-center items-center will-change-transform">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={opacityVariant2}
+        className="w-[9vw] h-full flex items-center justify-center"
+      >
         <div className="w-[13%] relative md:h-[15vh] outline outline-[#f2f2f2] rounded-2xl">
           <motion.div
             className="progress absolute w-1 bg-[#f2f2f2] rounded-2xl blur-[2px] left-1/2 -translate-x-[70%] top-3"
             style={{ height: "0%" }}
           ></motion.div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="w-[40vw] h-full flex flex-col px-5 justify-center gap-6 text-[#f2f2f2] pb-10">
-        <p className="inter text-[1.3vw] italic font-semibold text-[#FF6A39]">Universal Baraka</p>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={opacityVariant2}
+        className="w-[40vw] h-full flex flex-col px-5 justify-center gap-6 text-[#f2f2f2] pb-10"
+      >
+        <p className="inter text-[1.3vw] italic font-semibold text-[#FF6A39]">
+          Universal Baraka
+        </p>
         <div className="relative h-[25vh] montserrat">
           <Heading turn={turn} />
         </div>
         <div className="relative h-[35vh] overflow-visible">
           <Description turn={turn} />
         </div>
-      </div>
+      </motion.div>
 
-      <div className="w-[45vw] h-[90%] relative flex flex-col overflow-hidden justify-center">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={opacityVariant2}
+        className="w-[45vw] h-[90%] relative flex flex-col overflow-hidden justify-center"
+      >
         <div className="w-full h-[40%]">
           <img
             className="vision h-full w-[70%] relative left-[30%]"
@@ -173,7 +194,7 @@ function Third() {
             alt="Mission representation"
           />
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

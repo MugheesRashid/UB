@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "motion/react"
-import { leftVariant, opacityVariant } from "../../../assets/animation";
+import { leftVariant, opacityVariant2 } from "../../../assets/animation";
 
 function Sixth() {
   const client = [
@@ -44,7 +44,7 @@ function Sixth() {
         </p>
       </motion.div>
       <motion.div
-        variants={opacityVariant}
+        variants={opacityVariant2}
         initial="hidden"
         whileInView="visible"
         style={{ "--width": "150px" }}

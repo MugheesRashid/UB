@@ -3,7 +3,7 @@ import React from 'react'
 function Footer() {
     return (
         <>
-            <div className='w-screen h-[140vh] bg-[#111] text-[#f2f2f2] rounded-t-4xl'>
+            <div className='w-screen h-[140vh] bg-[#222] text-[#f2f2f2] rounded-t-4xl'>
                 <div className="w-full h-[45vh] flex flex-row items-center justify-between px-[8.8vw] border-b border-[#cdcdcd]">
                     <h6 className='text-[5vw] w-[50%] montaga leading-none'>Strength Focus To Deliver</h6>
                     <img src='FooterLogo.png' />

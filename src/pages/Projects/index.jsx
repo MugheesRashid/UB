@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import First from "./component/First";
-import Second from "./component/Second";
-import Third from "./component/Third";
 import ProjectPopup from "./component/ProjectPopup";
 import ProjectList from "./component/ProjectList";
 import "./style.css";
@@ -135,38 +133,42 @@ const Completed = [
   },
 ];
 
-function index() {
+function index({ loading }) {
   const [expanded, setExpanded] = useState(false);
-const [projects, setProjects] = useState(Ongoing); // Default to Ongoing
-const [activeIndex, setActiveIndex] = useState(0);
+  const [projects, setProjects] = useState(Ongoing); // Default to Ongoing
+  const [activeIndex, setActiveIndex] = useState(0);
 
-return (
-  <>
-    <First />
-    <ProjectList
-      title="Ongoing"
-      projects={Ongoing}
-      setExpanded={setExpanded}
-      setProjects={setProjects}
-      setActiveIndex={setActiveIndex}
-    />
-    <ProjectList
-      title="Completed"
-      projects={Completed}
-      setExpanded={setExpanded}
-      setProjects={setProjects}
-      setActiveIndex={setActiveIndex}
-    />
-    <ProjectPopup
-      expanded={expanded}
-      setExpanded={setExpanded}
-      projects={projects}
-      activeIndex={activeIndex}
-      setActiveIndex={setActiveIndex}
-    />
-  </>
-);
-
+  return (
+    <>
+      <First loading={loading} />
+      <h3 className="text-[5vw] text-[#2c2c2c] mx-auto text-center montserrat font-semibold">Projects</h3>
+      <ProjectList
+        title="Ongoing"
+        projects={Ongoing}
+        setExpanded={setExpanded}
+        setProjects={setProjects}
+        setActiveIndex={setActiveIndex}
+      />
+      <ProjectList
+        title="Completed"
+        projects={Completed}
+        setExpanded={setExpanded}
+        setProjects={setProjects}
+        setActiveIndex={setActiveIndex}
+      />
+      <ProjectPopup
+        expanded={expanded}
+        setExpanded={setExpanded}
+        projects={projects}
+        activeIndex={activeIndex}
+        setActiveIndex={setActiveIndex}
+      />
+      <div className="bg-[#d9d9d9] mx-auto mt-[0vh] mb-[4vh] text-[#000] w-[195px] h-[45px] border border-[#f2f2f2] rounded-3xl flex flex-center justify-center gap-5 items-center monsterrat">
+        <p className="text-[16px] font-medium">Our Services</p>
+        <img src="arrowlft.png" alt="Arrow left" />
+      </div>
+    </>
+  );
 }
 
 export default index;

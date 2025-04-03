@@ -3,6 +3,7 @@ import { RxCross1 } from "react-icons/rx";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { AnimatePresence, motion } from "motion/react";
+// import "./style.css"
 
 function ProjectPopup({
   setExpanded,
@@ -19,7 +20,7 @@ function ProjectPopup({
 
   if (!expanded || projected.length === 0) return null;
 
-  const activeProject = projected[activeIndex];
+  const activeProject = projected[activeIndex] || projects[0];
 
   const handleNext = () => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % projected.length);
@@ -32,7 +33,7 @@ function ProjectPopup({
   };
   return (
     <>
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="sync">
         {expanded && (
           <motion.div
             key={activeIndex+"Popup"}
@@ -40,13 +41,14 @@ function ProjectPopup({
             animate={{ height: "100%", opacity: 1 }}
             exit={{ height: 0, opacity: 0, scale: 0.95 }}
             transition={{ duration: 1.5, ease: "anticipate" }}
-            className="w-screen h- overflow-hidden fixed pt-2 -top-0 h-0 left-0 px-[4.5vw] bg-[#111] text-[#f2f2f2]"
+            className="w-screen h- overflow-hidden fixed pt-2 -top-0 left-0 px-[4.5vw] bg-[#fff] text-[#2c2c2c]"
           >
             <div className="head flex flex-row items-center justify-between">
-              <img className="w-[165px]" src="logoub.png" alt="" />
+              {/* <img className="w-[165px]" src="logoub.png" alt="" /> */}
+              <div></div>
               <div
                 onClick={() => setExpanded(false)}
-                className="w-[50px] h-[50px] text-[#2c2c2c] bg-[#fff] rounded-full flex justify-center items-center"
+                className="w-[50px] h-[50px] text-[#2c2c2c] bg-[#f2f2f2] rounded-full flex justify-center items-center"
               >
                 <RxCross1 size={"1.4em"} />
               </div>
@@ -54,7 +56,7 @@ function ProjectPopup({
             <div className="flex flex-row items-center justify-between gap-[2vw] mt-5">
               <div className="center w-1/2  h-full">
                 <h5 className="text-[3.5vw] montserrat font-semibold leading-none tracking-tight">
-                  {projected[activeIndex].title}
+                {activeProject?.title || "No Project Selected"}
                 </h5>
                 <div className="mt-5 poppins text-[1.05vw] flex flex-col justify-center items-center gap-[3vh]">
                   <p>
@@ -102,16 +104,16 @@ function ProjectPopup({
                 <div className="w-[49.5%] h-[40%] bg-[url('vision.png')] bg-center bg-cover bg-no-repeat"></div>
               </div>
             </div>
-            <div
+            {/* <div
               style={{ "--width": "420px", "--bg": "#2c2c2c" }}
-              className="slider h-[10vh] relative -bottom-3 left-0 z-[999]"
+              className="project_slider h-[10vh] relative -bottom-3 left-0 z-[999]"
             >
               <div className="list h-full">
                 <div
                   style={{ "--position": 0 }}
-                  className="item flex flex-row montserrat"
+                  className="item flex flex-row montserrat text-[#2c2c2c]"
                 >
-                  <p className="text-[2.7vw] text-[#fff] tracking-tighter font-semibold">
+                  <p className="text-[2.7vw] tracking-tighter font-semibold">
                     Universal Baraka
                   </p>
                   <img className="w-[5vw] h-[4vw]" src="Logo.png" />
@@ -120,7 +122,7 @@ function ProjectPopup({
                   style={{ "--position": 1 }}
                   className="item flex flex-row montserrat"
                 >
-                  <p className="text-[2.7vw] text-[#fff] tracking-tighter font-semibold">
+                  <p className="text-[2.7vw] tracking-tighter font-semibold">
                     Universal Baraka
                   </p>
                   <img className="w-[5vw] h-[4vw]" src="Logo.png" />
@@ -129,7 +131,7 @@ function ProjectPopup({
                   style={{ "--position": 2 }}
                   className="item flex flex-row montserrat"
                 >
-                  <p className="text-[2.7vw] text-[#fff] tracking-tighter font-semibold">
+                  <p className="text-[2.7vw] tracking-tighter font-semibold">
                     Universal Baraka
                   </p>
                   <img className="w-[5vw] h-[4vw]" src="Logo.png" />
@@ -138,13 +140,13 @@ function ProjectPopup({
                   style={{ "--position": 3 }}
                   className="item flex flex-row montserrat"
                 >
-                  <p className="text-[2.7vw] text-[#fff] tracking-tighter font-semibold">
+                  <p className="text-[2.7vw] tracking-tighter font-semibold">
                     Universal Baraka
                   </p>
                   <img className="w-[5vw] h-[4vw]" src="Logo.png" />
                 </div>
               </div>
-            </div>
+            </div> */}
           </motion.div>
         )}
       </AnimatePresence>

@@ -29,8 +29,8 @@ function App() {
         <Navbar loading={loading} />
         <Routes>
           <Route path="/" element={<Home loading={loading} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/projects" element={<Projects />} />
+          <Route path="/about" element={<About loading={loading} />} />
+          <Route path="/projects" element={<Projects loading={loading} />} />
         </Routes>
         <Footer />
       </main>

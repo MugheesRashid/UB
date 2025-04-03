@@ -41,13 +41,13 @@ function Loader({ setLoading }) {
         {!isLoaded && (
           <motion.div
             key="loader"
-            className="w-screen h-screen z-50 bg-[#111] overflow-hidden fixed top-0 left-0 flex items-center justify-center"
+            className="w-screen h-screen z-50 bg-[#1c1c1c] overflow-hidden fixed top-0 left-0 flex items-center justify-center"
             exit={{ height: 0 }}
             transition={{ duration: 0.2, ease: "linear", delay: 0.8 }}
           >
             <motion.div
               key="content"
-              className="h-[100%] overflow-hidden w-full px-[4.5vw] z-[3] absolute top-0 flex flex-col bg-[#2c2c2c] pb-[6vh] justify-between"
+              className="h-[100%] overflow-hidden w-full px-[4.5vw] z-[3] absolute top-0 flex flex-col bg-[#1c1c1c] pb-[6vh] justify-between"
               exit={{ y: "-150vh" }} // Moves up
               transition={{ duration: 0.2, ease: "linear", delay: 0.2 }}
             >

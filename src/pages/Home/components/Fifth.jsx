@@ -1,7 +1,7 @@
-import React, { useContext, useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion"; // Make sure you're using framer-motion
+import React, { useContext, useState, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "motion/react"; // Using framer-motion
 import { CursorContext } from "../../../assets/context/cursorContext";
-import { leftVariant, rightVariant, opacityVariant } from "../../../assets/animation";
+import { leftVariant } from "../../../assets/animation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -54,27 +54,24 @@ function Fifth() {
   const containerRef = useRef(null);
   const boxRef = useRef(null);
 
-  const reverseCursor = () => {
+  // Cursor handlers
+  const reverseCursor = useCallback(() => {
     setCursorVariant({ cursorVariant: "default", text: false, textWords: "" });
-  };
+  }, [setCursorVariant]);
 
-  const invisibleCursor = () => {
-    setCursorVariant({
-      cursorVariant: "invisible",
-      text: false,
-      textWords: "",
-    });
-  };
+  const invisibleCursor = useCallback(() => {
+    setCursorVariant({ cursorVariant: "invisible", text: false, textWords: "" });
+  }, [setCursorVariant]);
 
+  // Update GSAP animation when the box is active and coordinates change
   useGSAP(() => {
-    if (box) {
+    if (box && boxRef.current) {
       gsap.set(boxRef.current, {
         xPercent: -50,
         yPercent: -50,
         translateX: coordinates.x,
         translateY: coordinates.y,
       });
-
       gsap.to(boxRef.current, {
         left: coordinates.x,
         top: coordinates.y,
@@ -82,16 +79,32 @@ function Fifth() {
         ease: "power1",
       });
     }
-  }, []);
-  const follower = (e) => {
+  }, [box, coordinates]);
+
+  // Mouse move handler for updating cursor follower position
+  const follower = useCallback((e) => {
     if (!containerRef.current) return;
     const x = e.clientX - 50;
     const y = e.clientY - 50;
     setCoordinates({ x, y });
-  };
+  }, []);
+
+  // Handlers for work item hover events
+  const handleItemMouseEnter = useCallback(
+    (idx) => {
+      setActiveIndex(idx);
+      invisibleCursor();
+    },
+    [invisibleCursor]
+  );
+
+  const handleItemMouseLeave = useCallback(() => {
+    setActiveIndex(0);
+    reverseCursor();
+  }, [reverseCursor]);
 
   return (
-    <div className="w-screen h-[150vh] rounded-tl-4xl rounded-br-4xl px-[4.5vw] py-[100px] text-[#fcfcfc] bg-[#111]">
+    <div className="w-screen h-[150vh] rounded-tl-4xl rounded-br-4xl px-[4.5vw] py-[100px] text-[#fcfcfc] bg-[#1c1c1c]">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -106,8 +119,8 @@ function Fifth() {
           Our Work
         </h3>
         <p className="text-[1.2vw] leading-snug w-1/2 poppins font-light">
-          UNIVERSAL BARAKA aspires to become an acknowledged leader in the
-          fields of general contracting, construction management.
+          UNIVERSAL BARAKA aspires to become an acknowledged leader in the fields
+          of general contracting, construction management.
         </p>
       </motion.div>
 
@@ -133,6 +146,7 @@ function Fifth() {
             {box && (
               <motion.div
                 ref={boxRef}
+                key="cursorBox"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 exit={{ scale: 0 }}
@@ -154,21 +168,14 @@ function Fifth() {
           </AnimatePresence>
           {work.map((elem, idx) => (
             <div
-              onMouseEnter={() => {
-                setActiveIndex(idx);
-                invisibleCursor();
-              }}
-              onMouseLeave={() => {
-                setActiveIndex(0);
-                reverseCursor();
-              }}
+              onMouseEnter={() => handleItemMouseEnter(idx)}
+              onMouseLeave={handleItemMouseLeave}
               key={idx}
               style={{
-                borderBottom: idx === work.length - 1 ? "1px" : "0px",
-                borderColor: "#f2f2f2",
-                borderStyle: "solid",
+                borderBottom:
+                  idx === work.length - 1 ? "1px solid #f2f2f2" : "none",
               }}
-              className="w-full h-[85px] hover:px-5 hover:opacity-60 transition-all duration-300 ease-in-out border-t flex flex-row items-center justify-between border-[#2c2c2c] text-[#f2f2f2]"
+              className="w-full h-[85px] hover:px-5 hover:opacity-60 transition-all duration-300 ease-in-out border-t flex flex-row items-center justify-between border-[#f2f2f2] text-[#f2f2f2]"
             >
               <p className="text-[1.6vw]">{elem.title}</p>
               <p>{elem.date}</p>
@@ -184,14 +191,13 @@ function Fifth() {
             alt=""
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            whileInView={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
           />
         </AnimatePresence>
       </div>
 
-      <motion.div className="bg-[#111] text-[#f2f2f2] relative left-1/2 -translate-x-1/2 w-[225px] h-[45px] border border-[#f2f2f2] rounded-3xl flex flex-center justify-center gap-5 items-center monsterrat cursor-pointer">
+      <motion.div className="bg-[transparent] text-[#f2f2f2] relative left-1/2 -translate-x-1/2 w-[225px] h-[45px] border border-[#f2f2f2] rounded-3xl flex flex-center justify-center gap-5 items-center monsterrat cursor-pointer">
         <p className="text-[16px] font-normal">View More Projects</p>
         <img src="dkarrow.png" alt="Arrow left" />
       </motion.div>

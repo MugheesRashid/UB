@@ -9,7 +9,7 @@ function Second() {
         className="left relative w-1/2 flex flex-col justify-between text-[#2c2c2c]"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: false, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.3 }}
         variants={leftVariant}
       >
         <div className="w-full flex flex-col gap-[0.4vw] leading-none">

@@ -69,15 +69,15 @@ function First({ loading }) {
   useGSAP(() => {
     if (box) {
             gsap.set(boxRef.current, {
-        xPercent: -50,
-        yPercent: -50,
-        translateX: coordinates.x,
-        translateY: coordinates.y,
+        // xPercent: -50,
+        // yPercent: -50,
+        translateX: coordinates.x + 40,
+        translateY: coordinates.y + 10,
       });
 
       gsap.to(boxRef.current, {
-        left: coordinates.x,
-        top: coordinates.y,
+        left: coordinates.x + 40,
+        top: coordinates.y + 10,
         duration: 0.2,
         ease: "power1",
       });
@@ -158,11 +158,12 @@ function First({ loading }) {
   return (
     <>
       <AnimatePresence>
+      {loading ? ( 
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             while={{opacity: 0}}
-            transition={{ duration: 0.2, delay: 1, ease: "easeOut" }}
+            transition={{ duration: 0.2, delay: 0, ease: "easeOut" }}
             className="w-screen pt-5 h-[110vh] bg-[#f2f2f2] pl-[4.5vw] pr-[8vw] relative"
           >
             <header
@@ -185,7 +186,7 @@ function First({ loading }) {
                     exit={{ scale: 0 }}
                     transition={{ duration: 0.2, ease: "easeInOut" }}
                     ref={boxRef}
-                    className="circle w-[150px] h-[150px] pointer-events-none bg-[#FF6A39] fixed top-0 left-0 rounded-full -z-10"
+                    className="circle w-[150px] h-[150px] pointer-events-none bg-[#FF6A39] fixed rounded-full -z-10"
                   />
                 )}
               </AnimatePresence>
@@ -367,7 +368,10 @@ function First({ loading }) {
                 ></div>
               ))}
             </div>
-          </motion.div>
+          </motion.div>) : (
+            <div className="w-screen h-screen bg-red-500"></div>
+          )}
+
       </AnimatePresence>
     </>
   );

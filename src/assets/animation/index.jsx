@@ -1,3 +1,5 @@
+import { delay } from "motion";
+
 const letterVariants = {
   hidden: { opacity: 0, y: 50 }, // Start hidden & move up
   visible: (i) => ({
@@ -19,7 +21,7 @@ const opacityVariant2 = {
   hidden: { opacity: 0.1 },
   visible: {
     opacity: 1,
-    transition: { duration: 0.8, ease: "easeOut" },
+    transition: { duration: 0.8, delay: 0.2, ease: "easeOut" },
   },
 };
 

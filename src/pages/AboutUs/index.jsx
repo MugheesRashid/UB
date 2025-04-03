@@ -5,10 +5,10 @@ import Third from "./components/Third";
 import Sixth from "../Home/components/Sixth";
 import "./style.css"
 
-function index() {
+function index({loading}) {
   return (
     <>
-      <First />
+      <First loading={loading} />
       <Second />
       <Third />
       <Sixth />
